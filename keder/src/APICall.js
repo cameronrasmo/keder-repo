@@ -16,15 +16,19 @@ function APICallProvider(props) {
         } else if (query !== "") {
             url = `https://www.boredapi.com/api/activity?${queryType}=${query}`;
         }
-        Axios.get(url).then((response) => {
-            setActivity((prev) => (activity = response.data.activity));
-            setType((prev) => (type = response.data.type));
-            setPrice((prev) =>
-                response.data.price !== "" ? (price = response.data.price) : 0
-            );
-            setPeople((prev) => (people = response.data.participants));
-            setPanel((prev) => (panel = true));
-        });
+        Axios.get(url)
+            .then((response) => {
+                setActivity((prev) => (activity = response.data.activity));
+                setType((prev) => (type = response.data.type));
+                setPrice((prev) =>
+                    response.data.price !== ""
+                        ? (price = response.data.price)
+                        : 0
+                );
+                setPeople((prev) => (people = response.data.participants));
+                setPanel((prev) => (panel = true));
+            })
+            .catch((err) => console.log(err));
     }
 
     function close() {
